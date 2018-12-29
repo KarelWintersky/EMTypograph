@@ -1,8 +1,8 @@
 <?php
 namespace EMT\Tret;
 
-use EMT\Tret;
 use EMT\Lib;
+use EMT\Tret;
 
 /**
  * @see EMT_Tret
@@ -134,11 +134,18 @@ class Quote extends Tret
 							$__ay = 0;
 							if($__ax)
 							{
-								$k = preg_replace_callback("/(^|[^0-9])([0-9]+)\&raquo\;/ui",
-									create_function('$m','global $__ax,$__ay; $__ay++; if($__ay==$__ax){ return $m[1].$m[2]."&Prime;";} return $m[0];'),
-									$k);
-								$amount = 1;
-							}
+                                $k = preg_replace_callback("/(^|[^0-9])([0-9]+)\&raquo\;/ui",
+                                    function($m) {
+                                        global $__ax, $__ay;
+                                        $__ay++;
+                                        if($__ay == $__ax) {
+                                            return $m[1] . $m[2] . "&Prime;";
+                                        }
+                                        return $m[0];
+                                    },
+                                    $k);
+                                $amount = 1;
+                            }
 
 
 
