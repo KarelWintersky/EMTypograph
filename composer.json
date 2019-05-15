@@ -1,11 +1,25 @@
 {
-    "name": "tttptd/mdash",
-    "keywords": [],
+    "name": "karelwintersky/EMTypograph",
+    "description": "Typograph by Evgeny Muravjev",
+    "keywords": [
+      "php",
+      "typographer",
+      "typograph",
+      "типограф",
+      "evgeny",
+      "muravjev",
+      "евгений",
+      "муравьёв",
+      "EMT",
+      "EMTypograph",
+      "EMTypograf"
+    ],
+    "type": "extension",
     "license": "MIT",
     "authors": [
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=7.0"
     },
     "autoload": {
         "psr-4": {
