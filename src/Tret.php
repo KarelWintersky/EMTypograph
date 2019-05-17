@@ -16,7 +16,6 @@ class Tret
 	 * Набор правил в данной группе, который задан изначально
 	 * Его можно менять динамически добавляя туда правила с помощью put_rule
 	 *
-	 * @var unknown_type
 	 */
 	public    $rules;
 	public    $title;
@@ -212,7 +211,11 @@ class Tret
 					}
 					$this->error('Функция '.$rule['function'].' из правила '.$rule['id']. " не найдена");
 				} else {
-					$this->_text = preg_replace_callback($rule['pattern'],  create_function('$m', $rule['function']), $this->_text);
+
+                    $this->_text = preg_replace_callback($rule['pattern'], function ($m) use ($rule){
+                        call_user_func($rule['function']);
+                    }, $this->_text);
+
 					$this->log('Замена с использованием preg_replace_callback с инлайн функцией из правила '.$rule['id']);
 					return;
 				}
@@ -371,12 +374,13 @@ class Tret
 	}
 
 
-	/**
-	 * Добавить правило в группу
-	 *
-	 * @param string $name
-	 * @param array $params
-	 */
+    /**
+     * Добавить правило в группу
+     *
+     * @param $name
+     * @param $params
+     * @return $this
+     */
 	public function put_rule($name, $params)
 	{
 		$this->rules[$name] = $params;
@@ -416,11 +420,12 @@ class Tret
 		$this->settings[$key] = $value;
 	}
 
-	/**
-	 * Установлена ли настройка
-	 *
-	 * @param string $key
-	 */
+    /**
+     * Установлена ли настройка?
+     *
+     * @param $key
+     * @return bool
+     */
 	public function is_on($key)
 	{
 		if(!isset($this->settings[$key])) return false;
@@ -431,8 +436,8 @@ class Tret
 	/**
 	 * Получить строковое значение настройки
 	 *
-	 * @param unknown_type $key
-	 * @return unknown
+	 * @param string $key
+	 * @return mixed
 	 */
 	public function ss($key)
 	{

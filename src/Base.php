@@ -346,11 +346,12 @@ class Base
 		return false;
 	}
 
-	/**
-	 * Получаем ТРЕТ по идентификатору, т.е. названию класса
-	 *
-	 * @param unknown_type $name
-	 */
+    /**
+     * Получаем ТРЕТ по идентификатору, т.е. названию класса
+     *
+     * @param $name
+     * @return bool|mixed
+     */
 	public function get_tret($name)
 	{
 		if(isset($this->tret_objects[$name])) return $this->tret_objects[$name];
@@ -587,12 +588,12 @@ class Base
 
 	}
 
-
-	/**
-	 * Установлена ли настройка
-	 *
-	 * @param string $key
-	 */
+    /**
+     * Установлена ли настройка?
+     *
+     * @param $key
+     * @return bool
+     */
 	public function is_on($key)
 	{
 		if(!isset($this->settings[$key])) return false;
@@ -750,13 +751,13 @@ class Base
 		{
 			if(isset($setupmap['map']))
 			{
-				$ret['map'] = $test['params']['map'];
-				$ret['disable'] = $test['params']['map_disable'];
-				$ret['strict'] = $test['params']['map_strict'];
-				$test['params']['maps'] = array($ret);
-				unset($setupmap['map']);
-				unset($setupmap['map_disable']);
-				unset($setupmap['map_strict']);
+                $ret['map'] = $setupmap['map'];
+                $ret['disable'] = $setupmap['map_disable'];
+                $ret['strict'] = $setupmap['map_strict'];
+                $setupmap['maps'] = array($ret);
+                unset($setupmap['map']);
+                unset($setupmap['map_disable']);
+                unset($setupmap['map_strict']);
 			}
 			if(is_array($setupmap['maps']))
 			{

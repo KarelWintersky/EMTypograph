@@ -57,7 +57,7 @@ class Text extends Tret
     /**
 	 * Расстановка защищенных тегов параграфа (<p>...</p>) и переноса строки
 	 *
-	 * @return  void
+	 * @return string
 	 */
 	protected function do_paragraphs($text) {
 		$text = str_replace("\r\n","\n",$text);
